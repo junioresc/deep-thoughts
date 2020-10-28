@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
 import { QUERY_THOUGHT } from '../utils/queries';
 import ReactionList from '../components/ReactionList';
+import Auth from '../utils/auth';
+import ReactionForm from '../components/ReactionForm';
 
 const SingleThought = props => {
   const { id: thoughtId } = useParams();
@@ -32,6 +34,7 @@ const SingleThought = props => {
       </div>
 
       {thought.reactionCount > 0 && <ReactionList reactions={thought.reactions} />}
+      {Auth.loggedIn() && <ReactionForm thoughtId={thought._id} />}
     </div>
   );
 };
